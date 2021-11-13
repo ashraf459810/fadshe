@@ -1,0 +1,48 @@
+name: fad_shee
+description: A new Flutter application.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  smooth_page_indicator: ^0.2.0
+  carousel_slider: ^2.2.1
+  provider: ^4.3.2+2
+  easy_localization: ^2.3.3
+  get_it: ^5.0.1
+  dio: ^3.0.10
+  sign_in_with_apple:
+  flutter_secure_storage:
+  flushbar: ^1.10.4
+  cached_network_image: ^2.3.1
+  flutter_spinkit: ^4.1.2+1
+  keyboard_actions: ^3.3.1+1
+  webview_flutter:
+  flutter_facebook_auth: ^2.0.2+1
+  http: ^0.12.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/translations/
+
+  fonts:
+    - family: Overlock
+      fonts:
+        - asset: assets/fonts/Overlock-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Overlock-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Overlock-Black.ttf
+          weight: 900
