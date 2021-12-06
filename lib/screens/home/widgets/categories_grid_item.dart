@@ -15,7 +15,7 @@ class CategoriesGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     print("here the image ");
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         if (category.hasChildren)
           Navigator.of(context).pushNamed(SubcategoriesScreen.routeName,

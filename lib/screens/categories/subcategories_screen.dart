@@ -22,11 +22,12 @@ class _SubcategoriesScreenState extends BaseScreenState<SubcategoriesScreen> {
   }
 
   @override
-  Widget appBar(BuildContext context) => CustomAppBar(context: context, titleText: provider.categoryTitle);
+  Widget appBar(BuildContext context) =>
+      CustomAppBar(context: context, titleText: provider.categoryTitle);
 
   @override
   Widget buildState(BuildContext context) {
-    return Expanded(
+    return Container(
       child: Padding(
         padding: const EdgeInsets.all(AppDimens.spacingMedium),
         child: CategoriesGrid(provider.categories),

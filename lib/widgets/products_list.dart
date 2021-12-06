@@ -10,11 +10,13 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("here from library");
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: products.length,
-      itemBuilder: (ctx, index) => ProductsListItem(products[index], products.getItemLocation(index)),
+      itemBuilder: (ctx, index) =>
+          ProductsListItem(products[index], products.getItemLocation(index)),
     );
   }
 }

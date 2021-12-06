@@ -9,6 +9,7 @@ class BrandsCarouselPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("here first carousel");
     return Container(
         // height: 10,
         child: CachedNetworkImage(

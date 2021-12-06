@@ -20,32 +20,49 @@ class CategoriesListItem extends StatelessWidget {
         onTap: () {
           if (category.hasChildren)
             Navigator.of(context).pushNamed(CategoriesScreen.routeName,
-                arguments: {'category_id': category.id, 'category_title': category.title});
+                arguments: {
+                  'category_id': category.id,
+                  'category_title': category.title
+                });
           else
             Navigator.of(context).pushNamed(CategoryDetailsScreen.routeName,
-                arguments: {'category_id': category.id, 'category_title': category.title});
+                arguments: {
+                  'category_id': category.id,
+                  'category_title': category.title
+                });
         },
-        borderRadius: BorderRadius.all(Radius.circular(AppDimens.borderRadiusSmall)),
+        borderRadius:
+            BorderRadius.all(Radius.circular(AppDimens.borderRadiusSmall)),
         splashColor: AppColors.red,
         child: Ink(
-          decoration:
-              AppShapes.roundedRectDecoration(backgroundImage: category.imageUrl, radius: AppDimens.borderRadiusSmall),
+          decoration: AppShapes.roundedRectDecoration(
+              backgroundImage: category.imageUrl,
+              radius: AppDimens.borderRadiusSmall),
           child: Container(
-            height: 120,
+            // height: 80,
             padding: EdgeInsetsDirectional.fromSTEB(
-                AppDimens.spacingXLarge, AppDimens.spacingMedium, AppDimens.spacingSmall, AppDimens.spacingMedium),
+                AppDimens.spacingXLarge,
+                AppDimens.spacingMedium,
+                AppDimens.spacingSmall,
+                AppDimens.spacingMedium),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   category.title,
-                  style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1
+                      .copyWith(color: Colors.white, fontSize: 14),
                   textAlign: TextAlign.start,
                 ),
                 Text(
                   '${category.itemsCount} ${'item'.tr()}',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(color: Colors.white, fontSize: 10),
                   textAlign: TextAlign.start,
                 ),
               ],

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/navigation/navigation_service.dart';
@@ -52,6 +54,7 @@ void setupDependencies() {
 }
 
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   setupDependencies();
   startApp();
 }
@@ -102,5 +105,14 @@ class FadSheeApp extends StatelessWidget {
           onGenerateRoute: (routeSettings) =>
               RoutesManager().onGenerate(routeSettings),
         ));
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

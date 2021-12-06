@@ -13,10 +13,12 @@ class CategoriesGrid extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
-      childAspectRatio: 1.9,
+      childAspectRatio: 1.6,
       crossAxisSpacing: 2,
       mainAxisSpacing: 2,
-      children: [...categories.map((category) => CategoriesListItem(category)).toList()],
+      children: [
+        ...categories.map((category) => CategoriesListItem(category)).toList()
+      ],
     );
   }
 }

@@ -17,7 +17,9 @@ class CategoriesGrid extends StatelessWidget {
       childAspectRatio: 0.85,
       crossAxisSpacing: AppDimens.spacingXSmall,
       mainAxisSpacing: AppDimens.spacingXSmall,
-      children: [...categories.map((category) => CategoriesGridItem(category)).toList()],
+      children: [
+        ...categories.map((category) => CategoriesGridItem(category)).toList()
+      ],
     );
   }
 }

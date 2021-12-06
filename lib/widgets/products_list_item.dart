@@ -17,7 +17,7 @@ class ProductsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
           arguments: {
             'product_id': product.id,

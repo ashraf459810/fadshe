@@ -26,7 +26,7 @@ class BannersCarouselPage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(12),
                 color: Colors.white.withOpacity(0.6),
-                child: Text(banner.text,
+                child: Text(banner.text ?? "",
                     style: Theme.of(context).textTheme.bodyText1),
               ),
             )
