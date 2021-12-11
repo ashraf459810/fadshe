@@ -10,15 +10,21 @@ class CategoriesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 5,
-      childAspectRatio: 0.85,
-      crossAxisSpacing: AppDimens.spacingXSmall,
-      mainAxisSpacing: AppDimens.spacingXSmall,
+    return Column(
       children: [
-        ...categories.map((category) => CategoriesGridItem(category)).toList()
+        GridView.count(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          crossAxisCount: 5,
+          childAspectRatio: 0.85,
+          crossAxisSpacing: AppDimens.spacingXSmall,
+          mainAxisSpacing: AppDimens.spacingXSmall,
+          children: [
+            ...categories
+                .map((category) => CategoriesGridItem(category))
+                .toList(),
+          ],
+        ),
       ],
     );
   }

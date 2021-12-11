@@ -31,19 +31,42 @@ class _CartSummaryState extends State<CartSummary> {
         child: Padding(
           padding: const EdgeInsets.all(AppDimens.spacingLarge),
           child: Container(
-            height: 35,
-            child: Row(
+            height: 70,
+            child: Column(
               children: [
-                Text('checkout'.tr(), style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.white)),
-                Text('  (${cartProvider.totalItemsCount} ${'item'.tr()})',
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(color: Colors.white)),
-                SizedBox(width: AppDimens.spacingMedium),
-                Spacer(),
-                Text('${cartProvider.checkoutAmount.currencyFormat()}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        .copyWith(color: Colors.white, fontWeight: FontWeight.w900)),
+                Row(
+                  children: [
+                    Text('checkout'.tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white)),
+                    Text('  (${cartProvider.totalItemsCount} ${'item'.tr()})',
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            .copyWith(color: Colors.white)),
+                    SizedBox(width: AppDimens.spacingMedium),
+                    Spacer(),
+                    Text('${cartProvider.checkoutAmount.currencyFormat()}',
+                        style: Theme.of(context).textTheme.headline2.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.w900)),
+                  ],
+                ),
+                //     Row(
+                //   children: [
+                //     Text('delivery fees'.tr(), style: Theme.of(context).textTheme.headline2.copyWith(color: Colors.white)),
+                //     Text('  (${cartProvider.totalItemsCount} ${'item'.tr()})',
+                //         style: Theme.of(context).textTheme.subtitle1.copyWith(color: Colors.white)),
+                //     SizedBox(width: AppDimens.spacingMedium),
+                //     Spacer(),
+                //     Text('${cartProvider.checkoutAmount.currencyFormat()}',
+                //         style: Theme.of(context)
+                //             .textTheme
+                //             .headline2
+                //             .copyWith(color: Colors.white, fontWeight: FontWeight.w900)),
+                //   ],
+                // ),
               ],
             ),
           ),

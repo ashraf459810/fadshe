@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/category.dart';
 import 'package:fad_shee/models/data/product.dart';
@@ -16,7 +18,10 @@ class CategoryDetailsProvider with ChangeNotifier {
 
   CategoryDetailsProvider(Map<String, dynamic> categoryInfo) {
     category = categoryRepo.getCategory(categoryInfo['category_id']);
-    productRepo.fetchCategoryProductsPage(categoryInfo['category_id'], page).then((result) {
+    productRepo
+        .fetchCategoryProductsPage(categoryInfo['category_id'], page)
+        .then((result) {
+      log("success");
       if (result.isSuccessful) products.addAll(result.result as List<Product>);
       loading = false;
       notifyListeners();
@@ -25,7 +30,8 @@ class CategoryDetailsProvider with ChangeNotifier {
 
   loadMoreProducts() async {
     if (++page <= lastPage) {
-      Result result = await productRepo.fetchCategoryProductsPage(category.id, page);
+      Result result =
+          await productRepo.fetchCategoryProductsPage(category.id, page);
       if (result.isSuccessful) {
         products.addAll(result.result as List<Product>);
       }

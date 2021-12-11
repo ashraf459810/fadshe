@@ -101,6 +101,10 @@
   "comment_rate": "Comment/Rate",
   "type_your_comment": "Type your comment...",
   "add_comment": "Add Comment",
+  "Delivery Type" :"Delivery Type",
+  
+  "internal" : "internal",
+  "external": "external",
   "your_rating_saved_successfully": "Your rating has been saved successfully",
   "your_comment_saved_successfully": "Your comment has been added successfully"
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fad_shee/screens/base_screen_state.dart';
 import 'package:fad_shee/screens/category_details/category_details_provider.dart';
 import 'package:fad_shee/theme/AppColors.dart';
@@ -15,14 +17,18 @@ class CategoryDetailsScreen extends StatefulWidget {
   _CategoryDetailsScreenState createState() => _CategoryDetailsScreenState();
 }
 
-class _CategoryDetailsScreenState extends BaseScreenState<CategoryDetailsScreen> {
+class _CategoryDetailsScreenState
+    extends BaseScreenState<CategoryDetailsScreen> {
   ScrollController _scrollController = ScrollController();
   CategoryDetailsProvider provider;
 
   @override
   void initState() {
+    log("here categorises procucts");
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) provider.loadMoreProducts();
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent)
+        provider.loadMoreProducts();
     });
     super.initState();
   }
@@ -33,19 +39,22 @@ class _CategoryDetailsScreenState extends BaseScreenState<CategoryDetailsScreen>
   }
 
   @override
-  Widget appBar(BuildContext context) => CustomAppBar(context: context, titleText: provider.category.title);
+  Widget appBar(BuildContext context) =>
+      CustomAppBar(context: context, titleText: provider.category.title);
 
   @override
   Widget buildState(BuildContext context) {
+    log("categories items");
     return provider.loading
         ? initialLoading()
         : ScrollConfiguration(
-            behavior: ScrollBehavior()..buildViewportChrome(context, null, AxisDirection.down),
+            behavior: ScrollBehavior()
+              ..buildViewportChrome(context, null, AxisDirection.down),
             child: SingleChildScrollView(
               controller: _scrollController,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    AppDimens.spacingLarge, AppDimens.spacingLarge, AppDimens.spacingLarge, 0),
+                padding: const EdgeInsets.fromLTRB(AppDimens.spacingLarge,
+                    AppDimens.spacingLarge, AppDimens.spacingLarge, 0),
                 child: Column(
                   children: [
                     ProductsList(provider.products),

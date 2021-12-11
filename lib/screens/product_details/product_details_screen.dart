@@ -54,7 +54,6 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
 
   @override
   bool resizeToAvoidBottomInset() {
-    // TODO: implement resizeToAvoidBottomInset
     return super.resizeToAvoidBottomInset();
   }
 
@@ -127,6 +126,8 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
                         if (provider.product.description != null)
                           _buildProductDescription(),
                         productAttributesSelectors(),
+                        deliveryType(),
+                        quantity(),
                         if (Provider.of<UserProvider>(context).isLoggedIn)
                           _commentsSection(),
                         if (provider.similarProducts?.isNotEmpty ?? false)
@@ -219,7 +220,7 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
                 .copyWith(color: AppColors.red)),
       );
 
-  _buildProductDescription() => Padding(
+  Widget _buildProductDescription() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.spacingLarge),
         child: Text(
           provider.product.description,
@@ -230,7 +231,7 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
         ),
       );
 
-  productAttributesSelectors() => Container(
+  Widget productAttributesSelectors() => Container(
         padding: const EdgeInsets.symmetric(
             horizontal: AppDimens.spacingLarge,
             vertical: AppDimens.spacingLarge),
@@ -386,5 +387,57 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
   void dispose() {
     subscription.cancel();
     super.dispose();
+  }
+
+  deliveryType() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(AppDimens.spacingLarge,
+          AppDimens.spacingLarge, AppDimens.spacingLarge, 0),
+      child: Row(
+        children: [
+          Expanded(
+              child: Text("Delivery Type".tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3
+                      .copyWith(color: Colors.black))),
+          SizedBox(width: AppDimens.spacingLarge),
+          Text(
+            provider.product.deliveryType == 0
+                ? "${"internal".tr()}"
+                : "${"external".tr()}",
+            style: TextStyle(
+                fontSize: 18,
+                color: AppColors.grey,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  quantity() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(AppDimens.spacingLarge,
+          AppDimens.spacingLarge, AppDimens.spacingLarge, 0),
+      child: Row(
+        children: [
+          Expanded(
+              child: Text("quantity".tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline3
+                      .copyWith(color: Colors.black))),
+          SizedBox(width: AppDimens.spacingLarge),
+          Text(
+            provider.product.quantity.toString(),
+            style: TextStyle(
+                fontSize: 18,
+                color: AppColors.grey,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }

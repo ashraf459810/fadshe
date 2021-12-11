@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/user.dart';
 import 'package:fad_shee/network/result.dart';
@@ -31,11 +33,15 @@ class MainProvider with ChangeNotifier {
   }
 
   init() async {
+    log("here from the user");
+    log("${getIt<UserRepository>().user}");
+
     if (getIt<UserRepository>().user != null) {
       await _loadUserData();
       // tO Check if user is blocked
       bool continueToApp = await updateAccountStatus();
-      if (!continueToApp) await navService.pushNamedAndRemoveUntil(BlockedUserScreen.routeName);
+      if (!continueToApp)
+        await navService.pushNamedAndRemoveUntil(BlockedUserScreen.routeName);
     }
     // To prevent fetching App Data after redirecting to '/' after login
     if (categoryRepo.categories.isEmpty) {
@@ -59,7 +65,8 @@ class MainProvider with ChangeNotifier {
               result = await brandRepo.fetchBrands();
               if (result.isSuccessful) {
                 bool isSuccessful = await currencyRepo.init();
-                if (!isSuccessful) errorMessage = 'Failed initializing currency :(';
+                if (!isSuccessful)
+                  errorMessage = 'Failed initializing currency :(';
               }
             } else
               errorMessage = result.message;

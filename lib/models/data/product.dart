@@ -15,6 +15,7 @@ class Product with ChangeNotifier {
   final String images;
   final int quantity;
   final dynamic price;
+  final int deliveryType;
   final double discount;
   final int categoryId;
   final List<Attribute> attributes;
@@ -22,6 +23,7 @@ class Product with ChangeNotifier {
   int rating;
 
   Product({
+    this.deliveryType,
     this.id,
     this.title,
     this.description,
@@ -37,6 +39,8 @@ class Product with ChangeNotifier {
 
   factory Product.fromJson(Map<String, dynamic> jsonData) {
     return Product(
+        quantity: jsonData['quantity'],
+        deliveryType: jsonData['delivery_types_id'],
         id: jsonData['id'],
         title: jsonData['title'],
         description: jsonData['description'],

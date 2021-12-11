@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/user.dart';
 import 'package:fad_shee/network/api_service.dart';
