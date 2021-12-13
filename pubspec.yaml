@@ -18,6 +18,7 @@ dependencies:
   sign_in_with_apple:
   flutter_secure_storage:
   flushbar: ^1.10.4
+  fluttertoast: ^7.1.6
   cached_network_image: ^2.3.1
   flutter_spinkit: ^4.1.2+1
   keyboard_actions: ^3.3.1+1

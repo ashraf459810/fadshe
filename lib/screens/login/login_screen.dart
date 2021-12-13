@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/main.dart';
 
@@ -19,6 +19,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,9 +42,19 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
           .message
           .stream
           .listen((event) {
-        Flushbar(message: event, duration: Duration(seconds: 3))..show(context);
+        Fluttertoast.showToast(
+            msg: event,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
+        // Flushbar(message: event, duration: Duration(seconds: 3))..show(context);
       });
     });
+
     super.initState();
   }
 

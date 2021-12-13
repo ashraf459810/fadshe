@@ -5,12 +5,24 @@ import 'package:keyboard_actions/keyboard_actions_item.dart';
 
 class RegisterProvider with ChangeNotifier {
   final formKey = GlobalKey<FormState>();
-  Map<String, String> formData = {'name': null, 'email': null, 'phone': null, 'password': null};
-  List<FocusNode> focusNodes = [FocusNode(), FocusNode(), FocusNode(), FocusNode()];
+  Map<String, String> formData = {
+    'name': null,
+    'email': null,
+    'phone': null,
+    'password': null
+  };
+  List<FocusNode> focusNodes = [
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode()
+  ];
 
   get keyboardActionsConfig => KeyboardActionsConfig(
         actions: [
-          ...focusNodes.map((node) => KeyboardActionsItem(focusNode: node)).toList(),
+          ...focusNodes
+              .map((node) => KeyboardActionsItem(focusNode: node))
+              .toList(),
         ],
       );
 

@@ -28,6 +28,7 @@
   "order_title": "Title",
   "web_link": "Web link",
   "quantity": "Quantity",
+  "select city":"select city",
   "color": "Color",
   "size": "Size",
   "notes": "Notes",

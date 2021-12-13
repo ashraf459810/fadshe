@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/main.dart';
+import 'package:fad_shee/models/data/cities_model.dart';
 import 'package:fad_shee/models/data/user.dart';
 import 'package:fad_shee/network/result.dart';
 import 'package:fad_shee/repositories/user_repository.dart';
@@ -13,6 +15,7 @@ class UserProvider with ChangeNotifier {
   UserRepository userRepository = getIt<UserRepository>();
   bool loading = false;
   StreamController<String> message = StreamController.broadcast();
+  List<City> getcities = [];
 
   Map<String, dynamic> userMap;
   final editProfileFormKey = GlobalKey<FormState>();
@@ -22,6 +25,9 @@ class UserProvider with ChangeNotifier {
   User get user => userRepository.user;
 
   bool get isLoggedIn => userRepository.isLoggedIn;
+
+  // Future<List<CitiesModel>> get cities async =>
+  //     await userRepository.getCities().then((value) => value.result);
 
   Future redirectTo() async {
     await userRepository.loadUserInfo();
@@ -33,6 +39,7 @@ class UserProvider with ChangeNotifier {
 
   Future register(Map<String, String> formData) async {
     loading = true;
+
     notifyListeners();
     Result result = await userRepository.register(formData);
     if (result.isSuccessful) {
@@ -41,6 +48,14 @@ class UserProvider with ChangeNotifier {
     } else
       message.sink.add(result.message);
     loading = false;
+    notifyListeners();
+  }
+
+  Future getallcities() async {
+    log("here from provider");
+    //  loading = true;
+    Result cities = await userRepository.getCities();
+    getcities = cities.result;
     notifyListeners();
   }
 

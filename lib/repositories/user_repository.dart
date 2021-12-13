@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/user.dart';
@@ -63,7 +64,17 @@ class UserRepository extends BaseRepository {
       await setToken(accessToken);
       return await fetchUserData();
     } else
+      return Result(message: "Wrong Email Or Passwrod", isSuccessful: false);
+  }
+
+  Future<Result> getCities() async {
+    log("here from repo");
+    Result result = await getIt.get<ApiService>().cities.getCities();
+
+    if (result.isSuccessful) {
       return result;
+    } else
+      return Result(message: "Wrong Email Or Passwrod", isSuccessful: false);
   }
 
   Future<Result> loginwithapple(String email) async {
