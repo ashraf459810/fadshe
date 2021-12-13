@@ -6,10 +6,15 @@ import 'package:fad_shee/network/dio_http_client.dart';
 import 'package:fad_shee/network/result.dart';
 
 class Authentication extends ApiRequest {
-  Future<Result> register(name, email, phone, password) async {
+  Future<Result> register(name, email, phone, password, cityid) async {
     String url = '${DioHttpClient.baseUrl}/Register';
-    FormData data = FormData.fromMap(
-        {'name': name, 'email': email, 'phone': phone, 'password': password});
+    FormData data = FormData.fromMap({
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'password': password,
+      'cities_id': cityid
+    });
     try {
       Response response = await getIt.get<Dio>().post(url, data: data);
       var jsonData = response.data;

@@ -151,8 +151,12 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
                               list:
                                   Provider.of<UserProvider>(context).getcities,
                               onchanged: (val) {
-                                city = val.name;
+                                city = val.title;
+                                cityid = val.id;
+                                provider.formData["cities_id"] =
+                                    val.id.toString();
                               },
+                              getindex: () {},
                             ),
                           ),
                           Spacer(flex: 2),
@@ -176,7 +180,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
 
   Widget registerButton(BuildContext context) => FlatButton(
         onPressed: () async {
-          bool isValid = provider.validateAndSaveFromData();
+          bool isValid = provider.validateAndSaveFromData() && cityid != null;
           if (isValid) {
             await Provider.of<UserProvider>(context, listen: false)
                 .register(provider.formData);

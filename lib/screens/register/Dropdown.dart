@@ -1,3 +1,4 @@
+import 'package:fad_shee/theme/AppColors.dart';
 import 'package:flutter/material.dart';
 
 class DropDown extends StatefulWidget {
@@ -21,22 +22,20 @@ class _DropDownState extends State<DropDown> {
       isExpanded: true,
       underline: SizedBox(),
       hint: chosenvalue == null
-          ? Center(child: Text(widget.hint))
+          ? Center(
+              child: Text(widget.hint, style: TextStyle(color: AppColors.blue)))
           : Center(child: Text(chosenvalue)),
       items: widget.list.map((dynamic value) {
         return DropdownMenuItem<dynamic>(
             value: value,
             child: value is String
                 ? Center(child: new Text(value))
-                : Center(child: new Text(value.name)));
+                : Center(child: new Text(value.title)));
       }).toList(),
       onChanged: (value) {
         setState(() {
           widget.onchanged(value);
-          value is String ? chosenvalue = value : chosenvalue = value.name;
-          int index = 0;
-          index = widget.list.indexOf(value);
-          widget.getindex(index);
+          value is String ? chosenvalue = value : chosenvalue = value.title;
         });
       },
     );

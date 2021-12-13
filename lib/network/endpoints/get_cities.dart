@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -14,18 +15,23 @@ class GetCities extends ApiRequest {
     // try {
     print(url);
     Response response = await getIt.get<Dio>().get(url);
-    final jsonData = response.data;
-
+    var jsonData = response.data;
     if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
-      var cities = citiesModelFromJson(jsonData.toString());
+      List<City> banners =
+          (jsonData['Cities'] as List).map((e) => City.fromJson(e)).toList();
+      return Result(isSuccessful: true, result: banners);
 
-      return Result(isSuccessful: true, result: cities.cities);
-    } else {
-      return Result(isSuccessful: false, message: jsonData['Reason']);
+      // if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
+      //   var cities = citiesModelFromJson(jsonData);
+
+      //   return Result(isSuccessful: true, result: cities.cities);
+      // } else {
+      //   return Result(isSuccessful: false, message: jsonData['Reason']);
+      // }
+      // } catch (error) {
+      //   print(error);
+      //   return handleError(error);
+      // }
     }
-    // } catch (error) {
-    //   print(error);
-    //   return handleError(error);
-    // }
   }
 }

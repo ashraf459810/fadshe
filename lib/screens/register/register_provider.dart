@@ -9,7 +9,8 @@ class RegisterProvider with ChangeNotifier {
     'name': null,
     'email': null,
     'phone': null,
-    'password': null
+    'password': null,
+    'cities_id': null
   };
   List<FocusNode> focusNodes = [
     FocusNode(),

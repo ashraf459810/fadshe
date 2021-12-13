@@ -42,6 +42,7 @@ class UserRepository extends BaseRepository {
 
   Future<Result> register(Map<String, String> formData) async {
     Result result = await getIt.get<ApiService>().authentication.register(
+        formData['cities_id'],
         formData['name'],
         formData['email'],
         formData['phone'],
@@ -69,7 +70,7 @@ class UserRepository extends BaseRepository {
 
   Future<Result> getCities() async {
     log("here from repo");
-    Result result = await getIt.get<ApiService>().cities.getCities();
+    var result = await getIt.get<ApiService>().cities.getCities();
 
     if (result.isSuccessful) {
       return result;

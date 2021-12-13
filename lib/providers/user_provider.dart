@@ -38,6 +38,7 @@ class UserProvider with ChangeNotifier {
   Future setNotFirstVisit() async => userRepository.setNotFirstVisit();
 
   Future register(Map<String, String> formData) async {
+    log(formData.toString());
     loading = true;
 
     notifyListeners();
