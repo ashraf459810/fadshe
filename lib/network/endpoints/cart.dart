@@ -9,12 +9,16 @@ class Cart extends ApiRequest {
   Future<Result> fetchCartItems({String promoCode}) async {
     String url = '${DioHttpClient.baseUrl}/Cart/GetFinancials';
     try {
-      Response response =
-          await getIt.get<Dio>().get(url, queryParameters: promoCode != null ? {'promoCode': promoCode} : {});
+      Response response = await getIt.get<Dio>().get(url,
+          queryParameters: promoCode != null ? {'promoCode': promoCode} : {});
       var jsonData = response.data;
       if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
-        List<CartItem> items = (jsonData['Carts'] as List).map((e) => CartItem.fromJson(e)).toList();
-        return Result(isSuccessful: true, result: MapEntry(jsonData['CartsTotal'].toDouble(), items));
+        List<CartItem> items = (jsonData['Carts'] as List)
+            .map((e) => CartItem.fromJson(e))
+            .toList();
+        return Result(
+            isSuccessful: true,
+            result: MapEntry(jsonData['CartsTotal'].toDouble(), items));
       } else {
         return Result(isSuccessful: false, message: jsonData['Reason']);
       }
@@ -24,7 +28,8 @@ class Cart extends ApiRequest {
     }
   }
 
-  Future<Result> addToCart(int productId, int quantity, String attributes) async {
+  Future<Result> addToCart(
+      int productId, int quantity, String attributes) async {
     String url = '${DioHttpClient.baseUrl}/Cart/Add';
     try {
       Response response = await getIt.get<Dio>().get(url, queryParameters: {
@@ -63,7 +68,9 @@ class Cart extends ApiRequest {
   Future<Result> updateItemQuantity(int itemId, int quantity) async {
     String url = '${DioHttpClient.baseUrl}/Cart/Update/$itemId';
     try {
-      Response response = await getIt.get<Dio>().get(url, queryParameters: {'quantity': quantity});
+      Response response = await getIt
+          .get<Dio>()
+          .get(url, queryParameters: {'quantity': quantity});
       var jsonData = response.data;
       if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
         return Result(isSuccessful: true);
@@ -79,11 +86,15 @@ class Cart extends ApiRequest {
   Future<Result> fetchCartTotal({String promoCode}) async {
     String url = '${DioHttpClient.baseUrl}/Cart/GetFinancialsTotal';
     try {
-      Response response =
-          await getIt.get<Dio>().get(url, queryParameters: promoCode != null ? {'promoCode': promoCode} : {});
+      Response response = await getIt.get<Dio>().get(url,
+          queryParameters: promoCode != null ? {'promoCode': promoCode} : {});
       var jsonData = response.data;
       if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
-        return Result(isSuccessful: true, result: jsonData['CartsTotal'].toDouble());
+        return Result(
+            isSuccessful: true,
+            result: CartInfo(
+                cartTotal: jsonData['CartsTotal'].toDouble(),
+                cartFees: jsonData['DeliveryFees'].toDouble()));
       } else {
         return Result(isSuccessful: false, message: jsonData['Reason']);
       }
@@ -92,4 +103,11 @@ class Cart extends ApiRequest {
       return handleError(error);
     }
   }
+}
+
+class CartInfo {
+  final double cartFees;
+  final double cartTotal;
+
+  CartInfo({this.cartFees, this.cartTotal});
 }

@@ -13,10 +13,14 @@ class CartRepository extends BaseRepository {
 
   double _cartTotal = 0;
 
+  double _cartFees = 0;
+
   // if(true) => we should refresh cart from api to calculate cartTotal
   bool fetchCart = true;
 
   double get cartTotal => _cartTotal;
+
+  double get cartFees => _cartFees;
 
   int getProductQuantity(int productId) => _items
       .where((element) => element.product.id == productId)
@@ -38,18 +42,27 @@ class CartRepository extends BaseRepository {
   }
 
   Future<Result> addToCart(Product product, String attributes) async {
-    Result result = await getIt.get<ApiService>().cart.addToCart(product.id, 1, attributes);
+    Result result =
+        await getIt.get<ApiService>().cart.addToCart(product.id, 1, attributes);
     if (result.isSuccessful) {
       int createdItemId = result.result as int;
-      _items.add(CartItem(id: createdItemId, product: product, quantity: 1, attributes: attributes));
+      _items.add(CartItem(
+          id: createdItemId,
+          product: product,
+          quantity: 1,
+          attributes: attributes));
       await updateCartTotal();
     }
     return result;
   }
 
-  Future<Result> increaseItemQuantity(Product product, String attributes) async {
+  Future<Result> increaseItemQuantity(
+      Product product, String attributes) async {
     CartItem processedItem = searchForItem(product.id, attributes).value;
-    Result result = await getIt.get<ApiService>().cart.updateItemQuantity(processedItem.id, processedItem.quantity + 1);
+    Result result = await getIt
+        .get<ApiService>()
+        .cart
+        .updateItemQuantity(processedItem.id, processedItem.quantity + 1);
     if (result.isSuccessful) {
       fetchCart = true;
       ++processedItem.quantity;
@@ -58,12 +71,17 @@ class CartRepository extends BaseRepository {
     return result;
   }
 
-  Future<Result> decreaseItemQuantity(Product product, String attributes) async {
-    MapEntry<int, CartItem> processedItem = searchForItem(product.id, attributes);
+  Future<Result> decreaseItemQuantity(
+      Product product, String attributes) async {
+    MapEntry<int, CartItem> processedItem =
+        searchForItem(product.id, attributes);
     Result result;
     if (processedItem.value.quantity == 1) {
       // Remove Item from cart
-      result = await getIt.get<ApiService>().cart.removeFromCart(processedItem.value.id);
+      result = await getIt
+          .get<ApiService>()
+          .cart
+          .removeFromCart(processedItem.value.id);
       if (result.isSuccessful) {
         fetchCart = true;
         _items.removeAt(processedItem.key);
@@ -71,10 +89,8 @@ class CartRepository extends BaseRepository {
       }
     } else {
       // Update Item Quantity
-      result = await getIt
-          .get<ApiService>()
-          .cart
-          .updateItemQuantity(processedItem.value.id, processedItem.value.quantity - 1);
+      result = await getIt.get<ApiService>().cart.updateItemQuantity(
+          processedItem.value.id, processedItem.value.quantity - 1);
       if (result.isSuccessful) {
         fetchCart = true;
         --processedItem.value.quantity;
@@ -85,8 +101,12 @@ class CartRepository extends BaseRepository {
   }
 
   Future<Result> removeItem(Product product, String attributes) async {
-    MapEntry<int, CartItem> processedItem = searchForItem(product.id, attributes);
-    Result result = await getIt.get<ApiService>().cart.removeFromCart(processedItem.value.id);
+    MapEntry<int, CartItem> processedItem =
+        searchForItem(product.id, attributes);
+    Result result = await getIt
+        .get<ApiService>()
+        .cart
+        .removeFromCart(processedItem.value.id);
     if (result.isSuccessful) {
       fetchCart = true;
       _items.removeAt(processedItem.key);
@@ -97,8 +117,10 @@ class CartRepository extends BaseRepository {
 
   // returns <index, item>
   MapEntry<int, CartItem> searchForItem(int productId, String attributes) {
-    List<CartItem> matchedItems =
-        _items.where((item) => item.product.id == productId && item.attributes == attributes).toList();
+    List<CartItem> matchedItems = _items
+        .where((item) =>
+            item.product.id == productId && item.attributes == attributes)
+        .toList();
     if (matchedItems.isNotEmpty)
       return MapEntry(_items.indexOf(matchedItems.first), matchedItems.first);
     else
@@ -107,7 +129,8 @@ class CartRepository extends BaseRepository {
 
   // Compares current cart total (without promo code) with the cart total with promo code
   Future<Result> getPromoCodeDiscount(String promoCode) async {
-    Result result = await getIt.get<ApiService>().cart.fetchCartTotal(promoCode: promoCode);
+    Result result =
+        await getIt.get<ApiService>().cart.fetchCartTotal(promoCode: promoCode);
     if (result.isSuccessful) {
       double discount = _cartTotal - (result.result as double);
       if (discount > 0)
@@ -121,7 +144,8 @@ class CartRepository extends BaseRepository {
   Future updateCartTotal() async {
     Result result = await getIt.get<ApiService>().cart.fetchCartTotal();
     if (result.isSuccessful) {
-      _cartTotal = result.result as double;
+      _cartTotal = result.result.cartTotal as double;
+      _cartFees = result.result.cartFees as double;
     }
   }
 

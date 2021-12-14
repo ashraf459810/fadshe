@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/models/data/cities_model.dart';
@@ -155,6 +156,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
                                 cityid = val.id;
                                 provider.formData["cities_id"] =
                                     val.id.toString();
+                                log(provider.formData["cities_id"]);
                               },
                               getindex: () {},
                             ),

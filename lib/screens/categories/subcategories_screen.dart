@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fad_shee/screens/base_screen_state.dart';
 import 'package:fad_shee/screens/categories/categories_provider.dart';
@@ -34,6 +36,7 @@ class _SubcategoriesScreenState extends BaseScreenState<SubcategoriesScreen> {
 
   @override
   Widget buildState(BuildContext context) {
+    log("here");
     return ChangeNotifierProvider(
       create: (context) =>
           CategoryDetailsProvider({'category_id': provider.categories[0].id}),
@@ -63,17 +66,20 @@ class _SubcategoriesScreenState extends BaseScreenState<SubcategoriesScreen> {
                               arguments: {
                                 'product_id':
                                     Provider.of<CategoryDetailsProvider>(
-                                            context)
+                                            context,
+                                            listen: false)
                                         .products[index]
                                         .id,
                                 'product_name':
                                     Provider.of<CategoryDetailsProvider>(
-                                            context)
+                                            context,
+                                            listen: false)
                                         .products[index]
                                         .title,
                                 'category_id':
                                     Provider.of<CategoryDetailsProvider>(
-                                            context)
+                                            context,
+                                            listen: false)
                                         .products[index]
                                         .categoryId,
                               }),

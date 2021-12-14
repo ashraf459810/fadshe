@@ -41,12 +41,15 @@ class UserRepository extends BaseRepository {
   }
 
   Future<Result> register(Map<String, String> formData) async {
+    print(formData);
+    log(formData['cities_id']);
     Result result = await getIt.get<ApiService>().authentication.register(
-        formData['cities_id'],
-        formData['name'],
-        formData['email'],
-        formData['phone'],
-        formData['password']);
+          formData['name'],
+          formData['email'],
+          formData['phone'],
+          formData['password'],
+          formData['cities_id'],
+        );
     if (result.isSuccessful) {
       String accessToken = result.result as String;
       await setToken(accessToken);

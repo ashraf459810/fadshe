@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/network/api_request.dart';
@@ -17,6 +19,7 @@ class Authentication extends ApiRequest {
     });
     try {
       Response response = await getIt.get<Dio>().post(url, data: data);
+
       var jsonData = response.data;
       if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {
         return Result(isSuccessful: true, result: jsonData['api_token']);

@@ -17,9 +17,15 @@ class CartProvider with ChangeNotifier {
 
   int get itemsCount => items.length;
 
-  int get totalItemsCount => items.fold(0, (previousValue, item) => previousValue + item.quantity);
+  double get cartFees => cartRepo.cartFees;
 
-  int getProductQuantity(int productId) => cartRepo.getProductQuantity(productId);
+  // String get deliveryfees =>
+
+  int get totalItemsCount =>
+      items.fold(0, (previousValue, item) => previousValue + item.quantity);
+
+  int getProductQuantity(int productId) =>
+      cartRepo.getProductQuantity(productId);
 
   int getProductWithAttributesQuantity(int productId, String attributes) =>
       cartRepo.getProductWithAttributesQuantity(productId, attributes);
