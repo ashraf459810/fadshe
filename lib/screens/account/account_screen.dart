@@ -28,7 +28,9 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
             top: AppDimens.spacingXXLarge,
             bottom: AppDimens.spacingLarge),
         child: Row(
-          mainAxisAlignment: provider.isLoggedIn ? MainAxisAlignment.start : MainAxisAlignment.center,
+          mainAxisAlignment: provider.isLoggedIn
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.center,
           children: [
             headerImage(),
             if (provider.isLoggedIn) userInfo(),
@@ -38,18 +40,25 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
         ),
       );
 
-  headerImage() => CircleAvatar(
-        radius: 35,
-        backgroundColor: Colors.grey.withOpacity(0.09),
-        child: provider.user?.imageUrl == null
-            ? Image.asset('assets/images/app_logo.png')
-            : CircleAvatar(
-                radius: 33,
-                backgroundColor: Colors.white,
-                backgroundImage: provider.isLoggedIn
-                    ? CachedNetworkImageProvider(provider.user.imageUrl)
-                    : AssetImage('assets/images/ic_profile_guest.png'),
-              ),
+  headerImage() => Container(
+        height: 100,
+        width: 80,
+        child: Center(
+          child: CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.white,
+            backgroundImage: AssetImage('assets/images/app_logo.png'),
+            child: provider.user?.imageUrl == null
+                ? Image.asset('assets/images/app_logo.png')
+                : CircleAvatar(
+                    radius: 33,
+                    backgroundColor: Colors.white,
+                    backgroundImage: provider.isLoggedIn
+                        ? CachedNetworkImageProvider(provider.user.imageUrl)
+                        : AssetImage('assets/images/ic_profile_guest.png'),
+                  ),
+          ),
+        ),
       );
 
   userInfo() => Expanded(
@@ -58,8 +67,13 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(provider.user.name, style: Theme.of(context).textTheme.headline3),
-              Text(provider.user.email, style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey[500])),
+              Text(provider.user.name,
+                  style: Theme.of(context).textTheme.headline3),
+              Text(provider.user.email,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(color: Colors.grey[500])),
             ],
           ),
         ),
@@ -75,13 +89,16 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
 
   Widget _buildPageContent() {
     return ScrollConfiguration(
-      behavior: ScrollBehavior()..buildViewportChrome(context, null, AxisDirection.down),
+      behavior: ScrollBehavior()
+        ..buildViewportChrome(context, null, AxisDirection.down),
       child: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: AppDimens.spacingXLarge, right: AppDimens.spacingXLarge, bottom: AppDimens.spacingXLarge),
+                  left: AppDimens.spacingXLarge,
+                  right: AppDimens.spacingXLarge,
+                  bottom: AppDimens.spacingXLarge),
               child: AccountList(logout: () => provider.logout()),
             ),
           ],

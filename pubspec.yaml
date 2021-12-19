@@ -17,6 +17,7 @@ dependencies:
   dio: ^3.0.10
   sign_in_with_apple:
   flutter_secure_storage:
+  url_launcher: ^5.7.10
   flushbar: ^1.10.4
   fluttertoast: ^7.1.6
   cached_network_image: ^2.3.1
