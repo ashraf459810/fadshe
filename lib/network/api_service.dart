@@ -1,4 +1,3 @@
-import 'package:fad_shee/models/data/cities_model.dart';
 import 'package:fad_shee/network/endpoints/authentication.dart';
 import 'package:fad_shee/network/endpoints/banners.dart';
 import 'package:fad_shee/network/endpoints/brands.dart';

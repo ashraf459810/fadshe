@@ -31,7 +31,7 @@ class _CartSummaryState extends State<CartSummary> {
         child: Padding(
           padding: const EdgeInsets.all(AppDimens.spacingLarge),
           child: Container(
-            height: 70,
+            height: 130,
             child: Column(
               children: [
                 Row(
@@ -66,6 +66,23 @@ class _CartSummaryState extends State<CartSummary> {
                     SizedBox(width: AppDimens.spacingMedium),
                     Spacer(),
                     Text(("${cartProvider.cartFees.currencyFormat()}"),
+                        style: Theme.of(context).textTheme.headline2.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.w900)),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text('delivery days'.tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white)),
+                    SizedBox(width: AppDimens.spacingMedium),
+                    Spacer(),
+                    Text(("${cartProvider.deliverDays}"),
                         style: Theme.of(context).textTheme.headline2.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w900)),
                   ],

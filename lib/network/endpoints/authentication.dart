@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/network/api_request.dart';

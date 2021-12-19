@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/extensions/list_extensions.dart';
 import 'package:fad_shee/models/ui/account_item_model.dart';
@@ -15,7 +13,6 @@ import 'package:fad_shee/screens/orders/orders_screen.dart';
 import 'package:fad_shee/screens/wishlist/wishlist_screen.dart';
 import 'package:fad_shee/theme/AppShapes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

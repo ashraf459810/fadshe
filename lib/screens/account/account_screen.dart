@@ -42,23 +42,26 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
 
   headerImage() => Container(
         height: 100,
-        width: 80,
-        child: Center(
-          child: CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.white,
-            backgroundImage: AssetImage('assets/images/app_logo.png'),
-            child: provider.user?.imageUrl == null
-                ? Image.asset('assets/images/app_logo.png')
-                : CircleAvatar(
-                    radius: 33,
-                    backgroundColor: Colors.white,
-                    backgroundImage: provider.isLoggedIn
-                        ? CachedNetworkImageProvider(provider.user.imageUrl)
-                        : AssetImage('assets/images/ic_profile_guest.png'),
+        width: 100,
+        child: provider.user?.imageUrl == null
+            ? Container(
+                // color: Colors.black,
+                child: Expanded(
+                  child: Image.asset(
+                    'assets/images/app_logo.png',
+                    fit: BoxFit.cover,
+                    height: 100,
+                    width: 100,
                   ),
-          ),
-        ),
+                ),
+              )
+            : CircleAvatar(
+                radius: 33,
+                backgroundColor: Colors.white,
+                backgroundImage: provider.isLoggedIn
+                    ? CachedNetworkImageProvider(provider.user.imageUrl)
+                    : AssetImage('assets/images/ic_profile_guest.png'),
+              ),
       );
 
   userInfo() => Expanded(

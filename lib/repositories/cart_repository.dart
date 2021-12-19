@@ -15,12 +15,16 @@ class CartRepository extends BaseRepository {
 
   double _cartFees = 0;
 
+  String _deliveryDays;
+
   // if(true) => we should refresh cart from api to calculate cartTotal
   bool fetchCart = true;
 
   double get cartTotal => _cartTotal;
 
   double get cartFees => _cartFees;
+
+  String get deliveryDays => _deliveryDays;
 
   int getProductQuantity(int productId) => _items
       .where((element) => element.product.id == productId)
@@ -146,6 +150,7 @@ class CartRepository extends BaseRepository {
     if (result.isSuccessful) {
       _cartTotal = result.result.cartTotal as double;
       _cartFees = result.result.cartFees as double;
+      _deliveryDays = result.result.deliveryDays as String;
     }
   }
 

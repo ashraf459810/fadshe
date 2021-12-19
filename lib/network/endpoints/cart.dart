@@ -93,6 +93,7 @@ class Cart extends ApiRequest {
         return Result(
             isSuccessful: true,
             result: CartInfo(
+                deliveryDays: jsonData['DeliveryDays'].toString(),
                 cartTotal: jsonData['CartsTotal'].toDouble(),
                 cartFees: jsonData['DeliveryFees'].toDouble()));
       } else {
@@ -108,6 +109,7 @@ class Cart extends ApiRequest {
 class CartInfo {
   final double cartFees;
   final double cartTotal;
+  final String deliveryDays;
 
-  CartInfo({this.cartFees, this.cartTotal});
+  CartInfo({this.deliveryDays, this.cartFees, this.cartTotal});
 }
