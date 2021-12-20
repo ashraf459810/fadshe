@@ -7,7 +7,7 @@ import 'package:fad_shee/network/result.dart';
 
 class Products extends ApiRequest {
   Future<Result> fetchNewArrivalProducts() async {
-    String url = '${DioHttpClient.baseUrl}/Items';
+    String url = '${DioHttpClient.baseUrl}/Items?orderBy=random';
     try {
       Response response = await getIt.get<Dio>().get(url);
       var jsonData = response.data;

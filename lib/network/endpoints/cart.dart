@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/cart_item.dart';
@@ -18,6 +20,7 @@ class Cart extends ApiRequest {
             .toList();
         return Result(
             isSuccessful: true,
+            deliveryDays: jsonData['DeliveryDays'].toString(),
             result: MapEntry(jsonData['CartsTotal'].toDouble(), items));
       } else {
         return Result(isSuccessful: false, message: jsonData['Reason']);
@@ -93,7 +96,6 @@ class Cart extends ApiRequest {
         return Result(
             isSuccessful: true,
             result: CartInfo(
-                deliveryDays: jsonData['DeliveryDays'].toString(),
                 cartTotal: jsonData['CartsTotal'].toDouble(),
                 cartFees: jsonData['DeliveryFees'].toDouble()));
       } else {
