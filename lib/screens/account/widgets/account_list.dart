@@ -5,6 +5,7 @@ import 'package:fad_shee/network/endpoints/invite.dart';
 import 'package:fad_shee/network/result.dart';
 import 'package:fad_shee/providers/user_provider.dart';
 import 'package:fad_shee/repositories/user_repository.dart';
+import 'package:fad_shee/screens/account/widgets/InvitesWebView.dart';
 import 'package:fad_shee/screens/account/widgets/account_list_item.dart';
 import 'package:fad_shee/screens/currencies/currencies_screen.dart';
 import 'package:fad_shee/screens/languages/languages_screen.dart';
@@ -14,14 +15,14 @@ import 'package:fad_shee/screens/wishlist/wishlist_screen.dart';
 import 'package:fad_shee/theme/AppShapes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../main.dart';
 
 // ignore: must_be_immutable
 class AccountList extends StatelessWidget {
   final Function logout;
-
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
   AccountList({@required this.logout});
 
   List<AccountItemModel> getOptions(isLoggedIn) => [
@@ -52,14 +53,8 @@ class AccountList extends StatelessWidget {
         AccountItemModel(
             icon: 'invite.png',
             title: 'invite'.tr(),
-            // onClickNavigateTo: CurrenciesScreen.routeName,
-            onClick: () async {
-              UserRepository userRepo = getIt<UserRepository>();
-              var token = userRepo.token;
-              print(token);
-              await launch(
-                  "http://fadshee.com/api/referralWebView?api_token=$token");
-            }),
+            onClickNavigateTo: InvitesWebView.routeName,
+            onClick: () {}),
         if (isLoggedIn)
           AccountItemModel(
               icon: 'ic_logout.png',

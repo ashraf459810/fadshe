@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/models/data/cities_model.dart';
+import 'package:fad_shee/network/result.dart';
 import 'package:fad_shee/providers/user_provider.dart';
 import 'package:fad_shee/screens/base_screen_state.dart';
 import 'package:fad_shee/screens/register/Dropdown.dart';
@@ -15,6 +16,7 @@ import 'package:fad_shee/widgets/custom_text_field.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:provider/provider.dart';
 
@@ -35,10 +37,21 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      log("hereeeeee");
       subscription = Provider.of<UserProvider>(context, listen: false)
           .message
           .stream
           .listen((event) {
+        log("here from register");
+        Fluttertoast.showToast(
+            msg: event,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.red,
+            fontSize: 16.0);
+
         Flushbar(message: event, duration: Duration(seconds: 3))..show(context);
       });
     });
@@ -184,8 +197,20 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
         onPressed: () async {
           bool isValid = provider.validateAndSaveFromData() && cityid != null;
           if (isValid) {
-            await Provider.of<UserProvider>(context, listen: false)
-                .register(provider.formData);
+            final result =
+                await Provider.of<UserProvider>(context, listen: false)
+                    .register(provider.formData);
+
+            if (!result.isSuccessful) {
+              Fluttertoast.showToast(
+                  msg: result.message,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.red,
+                  fontSize: 16.0);
+            }
           }
         },
         shape: AppShapes.roundedRectShape(),

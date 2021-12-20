@@ -55,7 +55,8 @@ class UserRepository extends BaseRepository {
       await setToken(accessToken);
       return await fetchUserData();
     } else
-      return result;
+      return Result(
+          isSuccessful: false, message: "Email or Phone Already Exist");
   }
 
   Future<Result> login(Map<String, String> formData) async {

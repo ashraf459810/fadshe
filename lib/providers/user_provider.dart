@@ -46,10 +46,12 @@ class UserProvider with ChangeNotifier {
     if (result.isSuccessful) {
       userMap = userRepository.user?.toMap();
       navService.pushNamedAndRemoveUntil('/');
-    } else
-      message.sink.add(result.message);
-    loading = false;
-    notifyListeners();
+    } else {
+      loading = false;
+      notifyListeners();
+      return Result(
+          isSuccessful: false, message: "Email or Phone Already Exist");
+    }
   }
 
   Future getallcities() async {

@@ -46,7 +46,8 @@ class _AccountScreenState extends BaseScreenState<AccountScreen> {
         child: provider.user?.imageUrl == null
             ? Container(
                 // color: Colors.black,
-                child: Expanded(
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey[50],
                   child: Image.asset(
                     'assets/images/app_logo.png',
                     fit: BoxFit.cover,

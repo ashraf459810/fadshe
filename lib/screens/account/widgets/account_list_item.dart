@@ -16,7 +16,9 @@ class AccountListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => item.onClickNavigateTo != null ? navService.pushNamed(item.onClickNavigateTo) : item.onClick(),
+      onTap: () => item.onClickNavigateTo != null
+          ? navService.pushNamed(item.onClickNavigateTo)
+          : item.onClick(),
       splashColor: AppColors.grey.withOpacity(0.1),
       borderRadius: location == ListItemLocation.first
           ? BorderRadius.only(
@@ -35,11 +37,18 @@ class AccountListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset('assets/images/${item.icon}',
-                  width: AppDimens.iconSizeLarge, color: item.iconColor != null ? item.iconColor : AppColors.red),
+                  width: AppDimens.iconSizeLarge,
+                  color:
+                      item.iconColor != null ? item.iconColor : AppColors.red),
               SizedBox(width: AppDimens.spacingMedium),
-              Expanded(child: Text(item.title, style: Theme.of(context).textTheme.button)),
+              Expanded(
+                  child: Text(item.title,
+                      style: Theme.of(context).textTheme.button)),
               if (item.showArrow)
-                Icon(context.locale.languageCode == 'en' ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
+                Icon(
+                    context.locale.languageCode == 'en'
+                        ? Icons.keyboard_arrow_right
+                        : Icons.keyboard_arrow_left,
                     color: AppColors.midGrey),
             ],
           ),
