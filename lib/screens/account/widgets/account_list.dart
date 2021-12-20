@@ -57,9 +57,8 @@ class AccountList extends StatelessWidget {
               UserRepository userRepo = getIt<UserRepository>();
               var token = userRepo.token;
               print(token);
-              await launch("http://fadshee.com/api/referralWebView");
-              Result result = await invite(token);
-              if (result.isSuccessful = true) {}
+              await launch(
+                  "http://fadshee.com/api/referralWebView?api_token=$token");
             }),
         if (isLoggedIn)
           AccountItemModel(
