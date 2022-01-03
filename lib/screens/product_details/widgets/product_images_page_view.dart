@@ -2,7 +2,7 @@ import 'package:fad_shee/theme/AppDimes.dart';
 import 'package:flutter/material.dart';
 
 class ProductImagesPageView extends StatelessWidget {
-  final String images;
+  final List<String> images;
   final PageController controller;
 
   ProductImagesPageView({@required this.controller, @required this.images});
@@ -17,7 +17,7 @@ class ProductImagesPageView extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: AppDimens.spacingXSmall),
         alignment: Alignment.center,
         child: Image.network(
-          images,
+          images[index],
           fit: BoxFit.fitWidth,
         ),
       ),

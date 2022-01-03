@@ -6,7 +6,7 @@ import 'package:fad_shee/screens/checkout/checkout_screen.dart';
 import 'package:fad_shee/theme/AppColors.dart';
 import 'package:fad_shee/theme/AppDimes.dart';
 import 'package:fad_shee/theme/AppShapes.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +17,14 @@ class CartSummary extends StatefulWidget {
 
 class _CartSummaryState extends State<CartSummary> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of(context);
+
     return Card(
       elevation: 20,
       shadowColor: Colors.grey.withAlpha(50),
@@ -59,7 +65,9 @@ class _CartSummaryState extends State<CartSummary> {
                             .copyWith(color: Colors.white)),
                     SizedBox(width: AppDimens.spacingMedium),
                     Spacer(),
-                    Text(("${cartProvider.cartFees.currencyFormat()}"),
+                    Text(
+                        double.parse("${cartProvider.cartFees.toString()}")
+                            .currencyFormat(),
                         style: TextStyle(color: Colors.white, fontSize: 14)
                             .copyWith(color: Colors.white)),
                   ],

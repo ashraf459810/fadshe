@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fad_shee/models/data/cart_item.dart';
 import 'package:fad_shee/theme/AppColors.dart';
@@ -12,6 +14,7 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(item.product.images.split(",").first);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.spacingMedium),
       child: Row(
@@ -28,7 +31,10 @@ class OrderItem extends StatelessWidget {
         borderRadius:
             BorderRadius.all(Radius.circular(AppDimens.borderRadiusMedium)),
         child: CachedNetworkImage(
-          imageUrl: item.product.images.split(",").first,
+          imageUrl: item.product.images.split(",").first.contains("https")
+              ? item.product.images.split(",").first
+              : "https://fadshee.com/storage/item_files/" +
+                  item.product.images.split(",").first,
           width: 110,
           height: 110,
         ),

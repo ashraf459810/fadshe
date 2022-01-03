@@ -12,7 +12,7 @@ import 'package:fad_shee/repositories/category_repository.dart';
 import 'package:fad_shee/repositories/product_repository.dart';
 import 'package:fad_shee/repositories/user_repository.dart';
 import 'package:fad_shee/repositories/wish_list_repository.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class ProductDetailsProvider with ChangeNotifier {
@@ -31,12 +31,14 @@ class ProductDetailsProvider with ChangeNotifier {
   bool addingComment = false;
 
   // Selected Attributes
-  Map<Attribute, Value> selectedAttrValues = {}; // key: Attribute, value: selectedValue
+  Map<Attribute, Value> selectedAttrValues =
+      {}; // key: Attribute, value: selectedValue
 
   ProductDetailsProvider(Map<String, dynamic> productInfo) {
     // to show product name and category name immediately (do not wait the request)
     this.productName = productInfo['product_name'];
-    this.categoryName = categoryRepo.getCategory(productInfo['category_id']).title;
+    this.categoryName =
+        categoryRepo.getCategory(productInfo['category_id']).title;
     productRepo.fetchProductDetails(productInfo['product_id']).then((result) {
       if (result.isSuccessful) {
         product = result.result as Product;
@@ -47,11 +49,14 @@ class ProductDetailsProvider with ChangeNotifier {
       }
       notifyListeners();
     });
-    productRepo.fetchCategoryProductsPage(productInfo['category_id'], 1).then((result) {
+    productRepo
+        .fetchCategoryProductsPage(productInfo['category_id'], 1)
+        .then((result) {
       if (result.isSuccessful) {
         similarProducts = (result.result as List<Product>).take(4).toList();
         // exclude current product from similar products
-        similarProducts.removeWhere((element) => element.id == productInfo['product_id']);
+        similarProducts
+            .removeWhere((element) => element.id == productInfo['product_id']);
         similarProductsLoading = false;
       }
       notifyListeners();
@@ -71,9 +76,14 @@ class ProductDetailsProvider with ChangeNotifier {
   Future addComment() async {
     if (commentController.text.trim().isNotEmpty) {
       addingComment = true;
-      Result result = await productRepo.addComment(product.id, commentController.text);
+      Result result =
+          await productRepo.addComment(product.id, commentController.text);
       if (result.isSuccessful) {
-        product.comments.add(Comment(id: -1, text: commentController.text, date: DateTime.now(), user: getIt<UserRepository>().user));
+        product.comments.add(Comment(
+            id: -1,
+            text: commentController.text,
+            date: DateTime.now(),
+            user: getIt<UserRepository>().user));
         commentController.clear();
       } else
         message.sink.add(result.message);

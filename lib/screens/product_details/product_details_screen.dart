@@ -33,7 +33,9 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
-  PageController pageController = PageController(viewportFraction: 0.95);
+  PageController pageController = PageController(
+    viewportFraction: 0.95,
+  );
   ScrollController controller = ScrollController();
   ProductDetailsProvider provider;
   StreamSubscription subscription;
@@ -116,7 +118,7 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
                           height: 300,
                           child: ProductImagesPageView(
                             controller: pageController,
-                            images: provider.product.images.split(",").first,
+                            images: provider.product.images.split(","),
                           ),
                         ),
                         _buildPageIndicator(),
@@ -167,7 +169,7 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
         alignment: Alignment.center,
         child: SmoothPageIndicator(
             controller: pageController,
-            count: 1,
+            count: provider.product.images.split(",").length,
             effect: SlideEffect(
               activeDotColor: AppColors.red,
               dotWidth: 10,
@@ -403,7 +405,7 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
                       .copyWith(color: Colors.black))),
           SizedBox(width: AppDimens.spacingLarge),
           Text(
-            provider.product.deliveryType == 0
+            provider.product.deliveryType == 1
                 ? "${"internal".tr()}"
                 : "${"external".tr()}",
             style: TextStyle(

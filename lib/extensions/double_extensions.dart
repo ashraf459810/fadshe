@@ -2,7 +2,7 @@ import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/currency.dart';
 import 'package:fad_shee/repositories/currency_repository.dart';
 
-extension DoubleExtensions on double {
+extension DoubleExtensions on dynamic {
   String currencyFormat({bool withSymbol = true}) {
     CurrencyRepository currencyRepo = getIt();
     Currency appCurrency = currencyRepo.appCurrency;

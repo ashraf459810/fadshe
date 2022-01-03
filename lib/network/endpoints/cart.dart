@@ -6,11 +6,17 @@ import 'package:fad_shee/models/data/cart_item.dart';
 import 'package:fad_shee/network/api_request.dart';
 import 'package:fad_shee/network/dio_http_client.dart';
 import 'package:fad_shee/network/result.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Cart extends ApiRequest {
   Future<Result> fetchCartItems({String promoCode}) async {
     String url = '${DioHttpClient.baseUrl}/Cart/GetFinancials';
     try {
+      print("${DioHttpClient.baseUrl}+/Cart/GetFinancials");
+
+      var token = await getIt<FlutterSecureStorage>().read(key: 'token');
+      print(token);
+
       Response response = await getIt.get<Dio>().get(url,
           queryParameters: promoCode != null ? {'promoCode': promoCode} : {});
       var jsonData = response.data;
@@ -20,6 +26,7 @@ class Cart extends ApiRequest {
             .toList();
         return Result(
             isSuccessful: true,
+            deliveryFees: jsonData['DeliveryFees'].toString(),
             deliveryDays: jsonData['DeliveryDays'].toString(),
             result: MapEntry(jsonData['CartsTotal'].toDouble(), items));
       } else {

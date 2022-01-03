@@ -4,13 +4,15 @@ class Result {
   final Map<String, List<String>> errors;
   final String message;
   final dynamic deliveryDays;
+  final dynamic deliveryFees;
 
   Result(
       {this.isSuccessful,
       this.message,
       this.errors,
       this.result,
-      this.deliveryDays});
+      this.deliveryDays,
+      this.deliveryFees});
 
   factory Result.fromJson(Map<String, dynamic> jsonData) => Result(
       errors: jsonData.containsKey('errors')

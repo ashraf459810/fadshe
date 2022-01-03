@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/main.dart';
 import 'package:fad_shee/models/data/cart_item.dart';
@@ -11,9 +13,9 @@ class CartRepository extends BaseRepository {
 
   List<CartItem> get items => [..._items];
 
-  double _cartTotal = 0;
+  double _cartTotal;
 
-  double _cartFees = 0;
+  dynamic _cartFees;
 
   dynamic _deliveryDays;
 
@@ -22,7 +24,7 @@ class CartRepository extends BaseRepository {
 
   double get cartTotal => _cartTotal;
 
-  double get cartFees => _cartFees;
+  dynamic get cartFees => _cartFees;
 
   dynamic get deliveryDays => _deliveryDays;
 
@@ -39,6 +41,9 @@ class CartRepository extends BaseRepository {
       if (result.isSuccessful) {
         fetchCart = false;
         _deliveryDays = result.deliveryDays;
+
+        _cartFees = result.deliveryFees;
+
         MapEntry cartData = result.result as MapEntry;
         _cartTotal = cartData.key;
         _items.addAll(cartData.value);

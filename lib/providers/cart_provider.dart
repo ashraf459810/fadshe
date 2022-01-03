@@ -17,7 +17,7 @@ class CartProvider with ChangeNotifier {
 
   int get itemsCount => items.length;
 
-  double get cartFees => cartRepo.cartFees;
+  dynamic get cartFees => cartRepo.cartFees;
   String get deliverDays => cartRepo.deliveryDays;
   // String get deliveryfees =>
 
