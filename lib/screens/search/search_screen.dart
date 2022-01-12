@@ -29,12 +29,16 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
   }
 
   @override
-  Widget appBar(BuildContext context) => CustomAppBar(context: context, titleText: 'search'.tr());
+  Widget appBar(BuildContext context) =>
+      CustomAppBar(context: context, titleText: 'search'.tr());
 
   @override
   Widget buildState(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppDimens.spacingLarge, right: AppDimens.spacingLarge, top: AppDimens.spacingLarge),
+      padding: const EdgeInsets.only(
+          left: AppDimens.spacingLarge,
+          right: AppDimens.spacingLarge,
+          top: AppDimens.spacingLarge),
       child: SingleChildScrollView(
         controller: provider.scrollController,
         child: Form(
@@ -73,7 +77,8 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
               sortDropdown(),
               Container(
                 margin: EdgeInsets.only(top: AppDimens.spacingSmall),
-                decoration: AppShapes.roundedRectDecoration(borderColor: AppColors.midGrey),
+                decoration: AppShapes.roundedRectDecoration(
+                    borderColor: AppColors.midGrey),
                 child: CheckboxListTile(
                   activeColor: AppColors.red,
                   title: Text('show_only_with_discount'.tr()),
@@ -88,7 +93,9 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
               searchButton(context),
               Padding(
                 padding: EdgeInsets.all(AppDimens.spacingMedium),
-                child: provider.searchResults.isEmpty ? emptyState() : ProductsList(provider.searchResults),
+                child: provider.searchResults.isEmpty
+                    ? emptyState()
+                    : ProductsList(provider.searchResults),
               )
             ],
           ),
@@ -105,7 +112,8 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
         backingFieldName: 'title',
         padding: EdgeInsets.all(AppDimens.spacingMedium),
         keyboardType: TextInputType.text,
-        prefixIcon: Icon(Icons.search, size: AppDimens.iconSizeLarge, color: AppColors.midGrey),
+        prefixIcon: Icon(Icons.search,
+            size: AppDimens.iconSizeLarge, color: AppColors.midGrey),
         autoFocus: true,
         /*onChanged: (value) {
           if (value.isEmpty) provider.searchProduct();
@@ -133,7 +141,8 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
               hint: 'sort_by'.tr(),
               options: provider.sortByOptions,
               showBorder: true,
-              selectedOption: provider.sortByOptions.firstWhere((element) => element.id == provider.selectedSortByOptionId),
+              selectedOption: provider.sortByOptions.firstWhere(
+                  (element) => element.id == provider.selectedSortByOptionId),
               onOptionSelected: (option) {
                 provider.selectedSortByOptionId = (option as SortByOption).id;
               },
@@ -145,7 +154,8 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
               textAlign: AlignmentDirectional.centerStart,
               options: provider.sortDirections,
               showBorder: true,
-              selectedOption: provider.sortDirections.firstWhere((element) => element.id == provider.selectedSortDirectionId),
+              selectedOption: provider.sortDirections.firstWhere(
+                  (element) => element.id == provider.selectedSortDirectionId),
               onOptionSelected: (option) {
                 provider.selectedSortDirectionId = (option as SortDirection).id;
               },
@@ -161,7 +171,11 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
         shape: AppShapes.roundedRectShape(radius: 5),
         color: AppColors.red,
         icon: Icon(Icons.search_rounded, color: Colors.white, size: 20),
-        label: Text('search'.tr().toUpperCase(), style: Theme.of(context).textTheme.button.copyWith(color: Colors.white)),
+        label: Text('search'.tr().toUpperCase(),
+            style: Theme.of(context)
+                .textTheme
+                .button
+                .copyWith(color: Colors.white)),
       );
 
   emptyState() => Padding(
@@ -175,7 +189,10 @@ class _SearchScreenState extends BaseScreenState<SearchScreen> {
             SizedBox(height: AppDimens.spacingLarge),
             Text(
               'no_results_found'.tr(),
-              style: Theme.of(context).textTheme.bodyText1.copyWith(color: AppColors.blueGrey.withOpacity(0.3)),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: AppColors.blueGrey.withOpacity(0.3)),
             )
           ],
         ),

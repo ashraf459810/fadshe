@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fad_shee/screens/base_screen_state.dart';
 import 'package:fad_shee/screens/home/home_provider.dart';
@@ -29,6 +31,7 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
 
   @override
   Widget buildState(BuildContext context) {
+    log(provider.lowerBanners[0].toString());
     return ScrollConfiguration(
       behavior: ScrollBehavior()
         ..buildViewportChrome(context, null, AxisDirection.down),

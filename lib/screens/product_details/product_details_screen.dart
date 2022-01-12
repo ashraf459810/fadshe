@@ -6,6 +6,8 @@ import 'package:fad_shee/models/data/product.dart';
 import 'package:fad_shee/models/data/value.dart';
 import 'package:fad_shee/providers/user_provider.dart';
 import 'package:fad_shee/screens/base_screen_state.dart';
+import 'package:fad_shee/screens/categories/categories_screen.dart';
+import 'package:fad_shee/screens/category_details/category_details_screen.dart';
 import 'package:fad_shee/screens/product_details/product_details_provider.dart';
 import 'package:fad_shee/screens/product_details/widgets/comments_list.dart';
 import 'package:fad_shee/screens/product_details/widgets/product_actions.dart';
@@ -206,20 +208,26 @@ class _ProductDetailsScreenState extends BaseScreenState<ProductDetailsScreen> {
     );
   }
 
-  _category() => Container(
-        margin: EdgeInsetsDirectional.only(
-            start: AppDimens.spacingLarge,
-            top: AppDimens.spacingSmall,
-            bottom: AppDimens.spacingLarge),
-        padding: EdgeInsets.symmetric(
-            horizontal: AppDimens.spacingXSmall, vertical: 2),
-        decoration: AppShapes.roundedRectDecoration(
-            radius: AppDimens.spacingXSmall, borderColor: AppColors.red),
-        child: Text(provider.product.categoryName.toUpperCase(),
-            style: Theme.of(context)
-                .textTheme
-                .subtitle2
-                .copyWith(color: AppColors.red)),
+  _category() => InkWell(
+        onTap: () {
+          Navigator.of(context).pushNamed(CategoryDetailsScreen.routeName,
+              arguments: {"category_id": provider.product.categoryId});
+        },
+        child: Container(
+          margin: EdgeInsetsDirectional.only(
+              start: AppDimens.spacingLarge,
+              top: AppDimens.spacingSmall,
+              bottom: AppDimens.spacingLarge),
+          padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.spacingXSmall, vertical: 2),
+          decoration: AppShapes.roundedRectDecoration(
+              radius: AppDimens.spacingXSmall, borderColor: AppColors.red),
+          child: Text(provider.product.categoryName.toUpperCase(),
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle2
+                  .copyWith(color: AppColors.red)),
+        ),
       );
 
   Widget _buildProductDescription() => Padding(
