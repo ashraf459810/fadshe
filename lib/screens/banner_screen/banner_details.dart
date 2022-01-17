@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:fad_shee/extensions/list_extensions.dart';
 import 'package:fad_shee/models/data/product.dart';
 import 'package:fad_shee/screens/banner_screen/provider.dart';
+import 'package:fad_shee/theme/AppColors.dart';
 import 'package:fad_shee/widgets/products_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,19 +34,32 @@ class _BannerDetailsState extends State<BannerDetails> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BannerProvider>(
       create: (context) => BannerProvider()..getBannersList(widget.url),
-      child: Scaffold(body: Builder(builder: (context) {
-        return Container(
-            height: 700,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: Provider.of<BannerProvider>(context).productss.length,
-              itemBuilder: (context, index) => ProductsListItem(
-                  Provider.of<BannerProvider>(context).productss[index],
-                  Provider.of<BannerProvider>(context)
-                      .productss
-                      .getItemLocation(index)),
-            ));
-      })),
+      child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: AppBar(
+              centerTitle: true,
+              backgroundColor: AppColors.red,
+              title: Text(
+                '',
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
+          ),
+          body: Builder(builder: (context) {
+            return Container(
+                height: MediaQuery.of(context).size.height,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount:
+                      Provider.of<BannerProvider>(context).productss.length,
+                  itemBuilder: (context, index) => ProductsListItem(
+                      Provider.of<BannerProvider>(context).productss[index],
+                      Provider.of<BannerProvider>(context)
+                          .productss
+                          .getItemLocation(index)),
+                ));
+          })),
     );
   }
 }
