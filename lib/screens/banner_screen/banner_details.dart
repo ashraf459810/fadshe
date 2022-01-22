@@ -41,7 +41,7 @@ class _BannerDetailsState extends State<BannerDetails> {
               centerTitle: true,
               backgroundColor: AppColors.red,
               title: Text(
-                '',
+                widget.url,
                 style: TextStyle(fontSize: 22),
               ),
             ),

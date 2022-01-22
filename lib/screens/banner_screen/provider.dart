@@ -13,7 +13,7 @@ class BannerProvider with ChangeNotifier {
   Future getBannersList(String url) async {
     log(url);
     var response =
-        await getIt.get<Dio>().get('https://fadshee.com/api/Items?' + url);
+        await getIt.get<Dio>().get('https://fadshee.com/api/Items?title=$url');
     var jsonData = response.data;
 
     if (response.statusCode == 200 && jsonData['AZSVR'] == 'SUCCESS') {

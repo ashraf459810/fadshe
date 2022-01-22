@@ -20,8 +20,8 @@ class BannersCarousel extends StatelessWidget {
               .map((e) => GestureDetector(
                   onTap: () {
                     print(e.link);
-                    if (e.link != "#" && e.link.contains('search')) {
-                      var url = e.link.split('/search').last;
+                    if (e.link != "#") {
+                      var url = e.link;
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => BannerDetails(
                           url: url,
