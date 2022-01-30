@@ -6,7 +6,6 @@ import 'package:fad_shee/models/data/product.dart';
 import 'package:fad_shee/models/data/value.dart';
 import 'package:fad_shee/providers/user_provider.dart';
 import 'package:fad_shee/screens/base_screen_state.dart';
-import 'package:fad_shee/screens/categories/categories_screen.dart';
 import 'package:fad_shee/screens/category_details/category_details_screen.dart';
 import 'package:fad_shee/screens/product_details/product_details_provider.dart';
 import 'package:fad_shee/screens/product_details/widgets/comments_list.dart';

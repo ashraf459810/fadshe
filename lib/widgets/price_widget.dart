@@ -18,6 +18,7 @@ class PriceWidget extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
+            
             style: priceStyle != null
                 ? priceStyle
                 : Theme.of(context)
@@ -26,9 +27,13 @@ class PriceWidget extends StatelessWidget {
                     .copyWith(color: AppColors.grey),
             children: [
               TextSpan(
+                style: TextStyle(fontSize: 16),
+                
+                
                   text:
-                      '${(double.parse(price) - discount * double.parse(price) /100).currencyFormat(withSymbol: false)}'),
+                      '${(double.parse(price) - discount * double.parse(price) /100).currencyFormat(withSymbol: false)}',),
               TextSpan(
+                
                   text: appCurrencySymbol,
                   style: priceStyle != null
                       ? priceStyle
@@ -45,9 +50,10 @@ class PriceWidget extends StatelessWidget {
             text: TextSpan(
                 style: Theme.of(context).textTheme.subtitle1.copyWith(
                     color: Colors.grey[400],
+                    fontSize: 10,
                     decoration: TextDecoration.lineThrough),
                 children: [
-                  TextSpan(text: '${price.toString()}'),
+                  TextSpan(text: '${double.parse(price).currencyFormat(withSymbol: true)}'),
                 ]),
           ),
       ],
