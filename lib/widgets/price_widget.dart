@@ -27,7 +27,7 @@ class PriceWidget extends StatelessWidget {
             children: [
               TextSpan(
                   text:
-                      '${(double.parse(price) - discount).currencyFormat(withSymbol: false)}'),
+                      '${(double.parse(price) - discount * double.parse(price) /100).currencyFormat(withSymbol: false)}'),
               TextSpan(
                   text: appCurrencySymbol,
                   style: priceStyle != null

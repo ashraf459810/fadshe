@@ -79,7 +79,7 @@ class _CartSummaryState extends State<CartSummary> {
                             .copyWith(color: Colors.white)),
                     SizedBox(width: AppDimens.spacingMedium),
                     Spacer(),
-                    Text(("${cartProvider.deliverDays}"),
+                    Text(("${cartProvider.deliverDays??''}"),
                         style: TextStyle(color: Colors.white, fontSize: 14)
                             .copyWith(color: Colors.white)),
                   ],
